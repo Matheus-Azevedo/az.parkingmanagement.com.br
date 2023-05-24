@@ -1,4 +1,4 @@
-# PARKING MANAGEMENT - 
+# PARKING MANAGEMENT
 
 O projeto consiste no desenvolvimento de uma aplicação para gerenciamento de um estacionamento com pagamento em dinheiro automático. A ideia é criar um sistema que controle a entrada e saída de veículos, registrando as informações necessárias, como placa e tipo de veículo, para calcular o preço a ser cobrado.
 
