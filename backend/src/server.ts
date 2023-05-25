@@ -3,7 +3,8 @@ import 'dotenv/config'
 import fastify from 'fastify'
 import cors from '@fastify/cors'
 import jwt from '@fastify/jwt'
-// import { memoriesRoutes } from './routes/memories'
+import { vehiclesRoutes } from './routes/vehicles'
+import { currencyStockRoutes } from './routes/currencyStock'
 // import { authRoutes } from './routes/auth'
 // import { uploadRoutes } from './routes/upload'
 
@@ -17,9 +18,10 @@ app.register(jwt, {
   secret: 'az.parkingmanagement.com.br',
 })
 
-// app.register()
+// app.register(authRoutes)
 // app.register(uploadRoutes)
-// app.register(memoriesRoutes)
+app.register(vehiclesRoutes)
+app.register(currencyStockRoutes)
 
 app
   .listen({

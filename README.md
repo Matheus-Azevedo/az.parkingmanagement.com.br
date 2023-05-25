@@ -42,6 +42,7 @@ Para a implementação, você pode escolher a tecnologia de sua preferência. No
 -   `npm i @fastify/jwt`: Instala o pacote Fastify JWT, que fornece suporte para autenticação baseada em JWT (JSON Web Tokens) no Fastify.
 
 -   `npm i @fastify/cors`: Instala o pacote Fastify CORS, que permite configurar as URLs que têm permissão para acessar a API de forma segura.
+-   `npm i dayjs`: Instala um pacote de data
 
 # FRONTEND SETUP
 

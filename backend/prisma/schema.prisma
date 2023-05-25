@@ -24,11 +24,12 @@ model Vehicle {
   exit       DateTime?
   totalSpent Float?
   amountPaid Float?
+  credit     Float?
 }
 
 model CurrencyStock {
   id       String @id @default(uuid())
-  value    Float
+  value    Float @unique
   type     String
   quantity Int
 }
