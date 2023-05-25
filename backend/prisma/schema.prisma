@@ -11,6 +11,24 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
+  id       String @id @default(uuid())
+  name     String
+  password String
+}
+
+model Vehicle {
+  id         String    @id @default(uuid())
+  plaque     String    @unique
+  model      String
+  entry      DateTime  @default(now())
+  exit       DateTime?
+  totalSpent Float?
+  amountPaid Float?
+}
+
+model CurrencyStock {
+  id       String @id @default(uuid())
+  value    Float
+  type     String
+  quantity Int
 }
