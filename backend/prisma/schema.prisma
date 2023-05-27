@@ -11,9 +11,13 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String    @id @default(uuid())
   name     String
+  email    String    @unique
   password String
+  role     String
+  credit   Float?
+  Vehicle  Vehicle[]
 }
 
 model Vehicle {
@@ -24,12 +28,13 @@ model Vehicle {
   exit       DateTime?
   totalSpent Float?
   amountPaid Float?
-  credit     Float?
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
 }
 
 model CurrencyStock {
   id       String @id @default(uuid())
-  value    Float @unique
+  value    Float
   type     String
   quantity Int
 }
