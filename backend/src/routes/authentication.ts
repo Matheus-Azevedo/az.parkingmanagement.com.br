@@ -2,6 +2,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import prismaClient from '../database/prismaClient'
 import bcrypt from 'bcryptjs'
+import { statusCode } from '../utils/statusCode'
 
 export async function authenticationRoutes(app: FastifyInstance) {
   app.post('/login', async (request: FastifyRequest, reply: FastifyReply) => {
@@ -19,7 +20,7 @@ export async function authenticationRoutes(app: FastifyInstance) {
     })
 
     if (!user) {
-      reply.status(404).send({ message: 'Email or password incorrect' })
+      reply.status(statusCode.NOT_FOUND).send({ message: 'User not found' })
     } else {
       const token = app.jwt.sign(
         {
@@ -32,7 +33,7 @@ export async function authenticationRoutes(app: FastifyInstance) {
         },
       )
 
-      reply.status(200).send({ token })
+      reply.status(statusCode.OK).send({ token })
     }
   })
 
@@ -66,20 +67,23 @@ export async function authenticationRoutes(app: FastifyInstance) {
             role: userInfo.role,
           },
         })
+        const token = app.jwt.sign(
+          {
+            name: user.name,
+            email: user.email,
+          },
+          {
+            sub: user.id,
+            expiresIn: '7 days',
+          },
+        )
+
+        reply.status(statusCode.CREATED).send({ token })
+      } else {
+        reply
+          .status(statusCode.CONFLICT)
+          .send({ message: 'User already exists' })
       }
-
-      const token = app.jwt.sign(
-        {
-          name: user.name,
-          email: user.email,
-        },
-        {
-          sub: user.id,
-          expiresIn: '7 days',
-        },
-      )
-
-      reply.status(201).send({ token })
     },
   )
 }
