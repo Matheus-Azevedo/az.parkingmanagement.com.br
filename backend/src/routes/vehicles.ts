@@ -60,6 +60,7 @@ export async function vehiclesRoutes(app: FastifyInstance) {
           plaque,
           model,
           entry: dayjs(new Date()).format('ss:mm:HH DD/MM/YYYY'),
+          userId: request.user.sub,
         },
       })
 
@@ -81,9 +82,7 @@ export async function vehiclesRoutes(app: FastifyInstance) {
       })
 
       const { id } = idSchema.parse(request.params)
-      const { exit, totalSpent, amountPaid, credit } = bodySchema.parse(
-        request.body,
-      )
+      const { exit, totalSpent, amountPaid } = bodySchema.parse(request.body)
 
       const vehicleExists = await prismaClient.vehicle.findUnique({
         where: { id },
@@ -99,7 +98,6 @@ export async function vehiclesRoutes(app: FastifyInstance) {
           exit,
           totalSpent,
           amountPaid,
-          credit,
         },
       })
 
