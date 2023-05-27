@@ -1,27 +1,26 @@
 'use client'
 
-import Cookies from 'js-cookie'
+import Link from 'next/link'
 import React, { FormEvent, useState } from 'react'
-import { IoCarSportSharp } from 'react-icons/io5'
 import { api } from '@/lib/api'
+import Cookies from 'js-cookie'
+import { IoCarSportSharp } from 'react-icons/io5'
 
-export default function Register() {
-  const [name, setName] = useState('')
+export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('')
 
   async function submitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    const { data } = await api.post('/register', {
-      name,
+    const { data } = await api.post('/login', {
       email,
       password,
-      role,
     })
 
     const { token } = data
+
+    console.log(token)
 
     Cookies.set('token', token)
   }
@@ -33,19 +32,7 @@ export default function Register() {
         className="border-secondary rounded border p-4"
         onSubmit={submitHandler}
       >
-        <h1 className="mb-4 text-center">Enter your registration</h1>
-        <div className="form-outline mb-4">
-          <label className="form-label" htmlFor="name_field">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name_field"
-            className="form-control w-full rounded-full"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+        <h1 className="mb-4 text-center">Login</h1>
         <div className="form-outline mb-4">
           <label className="form-label" htmlFor="email_field">
             Email address
@@ -58,6 +45,7 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
         <div className="form-outline mb-4">
           <label className="form-label" htmlFor="password_field">
             Password
@@ -70,26 +58,20 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        Role
-        <div>
-          <select
-            name="role"
-            value={role}
-            className="rounded-full"
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="">Select role</option>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
+
         <div className="text-center">
           <button
             type="submit"
             className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
           >
-            Register
+            Sign in
           </button>
+        </div>
+
+        <div className="text-center">
+          <p>
+            Not a member? <Link href="/register">Register</Link>
+          </p>
         </div>
       </form>
     </main>

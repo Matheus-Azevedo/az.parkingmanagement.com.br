@@ -5,8 +5,7 @@ import cors from '@fastify/cors'
 import jwt from '@fastify/jwt'
 import { vehiclesRoutes } from './routes/vehicles'
 import { currencyStockRoutes } from './routes/currencyStock'
-// import { authRoutes } from './routes/auth'
-// import { uploadRoutes } from './routes/upload'
+import { authenticationRoutes } from './routes/authentication'
 
 const app = fastify()
 
@@ -18,8 +17,7 @@ app.register(jwt, {
   secret: 'az.parkingmanagement.com.br',
 })
 
-// app.register(authRoutes)
-// app.register(uploadRoutes)
+app.register(authenticationRoutes)
 app.register(vehiclesRoutes)
 app.register(currencyStockRoutes)
 
