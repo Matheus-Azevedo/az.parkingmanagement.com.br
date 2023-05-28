@@ -5,13 +5,17 @@ import React, { FormEvent, useState } from 'react'
 import { api } from '@/lib/api'
 import Cookies from 'js-cookie'
 import { IoCarSportSharp } from 'react-icons/io5'
+import { useRouter } from 'next/navigation'
+import jwtDecode from 'jwt-decode'
+import { iToken } from '@/interfaces/token'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const router = useRouter()
 
-  async function submitHandler(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function submitHandler(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
 
     const { data } = await api.post('/login', {
       email,
@@ -20,9 +24,13 @@ export default function Login() {
 
     const { token } = data
 
-    console.log(token)
-
     Cookies.set('token', token)
+
+    const decryptedToken: iToken = jwtDecode(token)
+    const { role } = decryptedToken
+
+    if (role === 'admin') router.push('/admin')
+    else router.push('/user')
   }
 
   return (

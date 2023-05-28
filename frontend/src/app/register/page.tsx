@@ -11,8 +11,8 @@ export default function Register() {
   const [password, setPassword] = useState('')
   const [role, setRole] = useState('')
 
-  async function submitHandler(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function submitHandler(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
 
     const { data } = await api.post('/register', {
       name,

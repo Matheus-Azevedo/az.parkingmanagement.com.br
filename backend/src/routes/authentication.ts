@@ -26,6 +26,7 @@ export async function authenticationRoutes(app: FastifyInstance) {
         {
           name: user.name,
           email: user.email,
+          role: user.role,
         },
         {
           sub: user.id,
@@ -71,6 +72,7 @@ export async function authenticationRoutes(app: FastifyInstance) {
           {
             name: user.name,
             email: user.email,
+            role: user.role,
           },
           {
             sub: user.id,
