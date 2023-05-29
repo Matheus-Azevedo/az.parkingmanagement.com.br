@@ -34,6 +34,7 @@ model Vehicle {
 
 model CurrencyStock {
   id       String @id @default(uuid())
+  name     String @unique
   value    Float
   type     String
   quantity Int

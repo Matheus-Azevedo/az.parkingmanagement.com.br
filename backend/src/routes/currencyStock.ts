@@ -36,15 +36,16 @@ export async function currencyStockRoutes(app: FastifyInstance) {
     '/currency',
     async (request: FastifyRequest, reply: FastifyReply) => {
       const bodySchema = z.object({
+        name: z.string(),
         value: z.number(),
         type: z.string(),
         quantity: z.number(),
       })
 
-      const { value, type, quantity } = bodySchema.parse(request.body)
+      const { value, type, quantity, name } = bodySchema.parse(request.body)
 
       const currencyStockExists = await prismaClient.currencyStock.findFirst({
-        where: { value },
+        where: { name },
       })
 
       if (currencyStockExists) {
@@ -56,6 +57,7 @@ export async function currencyStockRoutes(app: FastifyInstance) {
           value,
           type,
           quantity,
+          name,
         },
       })
 
