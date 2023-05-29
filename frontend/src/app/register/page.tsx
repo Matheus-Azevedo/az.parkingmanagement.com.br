@@ -4,12 +4,14 @@ import Cookies from 'js-cookie'
 import React, { FormEvent, useState } from 'react'
 import { IoCarSportSharp } from 'react-icons/io5'
 import { api } from '@/lib/api'
+import { useRouter } from 'next/navigation'
 
 export default function Register() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [role, setRole] = useState('')
+  const router = useRouter()
 
   async function submitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -24,6 +26,8 @@ export default function Register() {
     const { token } = data
 
     Cookies.set('token', token)
+
+    router.push('/login')
   }
 
   return (

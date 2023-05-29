@@ -2,23 +2,36 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { statusCode } from '../utils/statusCode'
 import prismaClient from '../database/prismaClient'
 import { z } from 'zod'
-import dayjs from 'dayjs'
 
 export async function vehiclesRoutes(app: FastifyInstance) {
   app.addHook('preHandler', async (request: FastifyRequest) => {
     await request.jwtVerify()
   })
 
-  app.get(
-    '/vehicles',
-    async (_request: FastifyRequest, reply: FastifyReply) => {
-      const vehicles = await prismaClient.vehicle.findMany()
-      if (!vehicles) {
-        reply.status(statusCode.NOT_FOUND).send()
-      }
-      reply.status(statusCode.OK).send(vehicles)
-    },
-  )
+  app.get('/vehicles', async (request: FastifyRequest, reply: FastifyReply) => {
+    let vehicles = []
+    if (request.user.role === 'admin') {
+      vehicles = await prismaClient.vehicle.findMany({
+        orderBy: {
+          entry: 'asc',
+        },
+      })
+    } else {
+      vehicles = await prismaClient.vehicle.findMany({
+        where: {
+          userId: request.user.sub,
+        },
+        orderBy: {
+          entry: 'asc',
+        },
+      })
+    }
+
+    if (!vehicles) {
+      reply.status(statusCode.NOT_FOUND).send()
+    }
+    reply.status(statusCode.OK).send(vehicles)
+  })
 
   app.get(
     '/vehicles/:id',
@@ -32,6 +45,10 @@ export async function vehiclesRoutes(app: FastifyInstance) {
       })
       if (!vehicle) {
         reply.status(statusCode.NOT_FOUND).send()
+      }
+
+      if (vehicle?.userId !== request.user.sub) {
+        return reply.status(statusCode.UNAUTHORIZED).send()
       }
       reply.status(statusCode.OK).send(vehicle)
     },
@@ -59,7 +76,7 @@ export async function vehiclesRoutes(app: FastifyInstance) {
         data: {
           plaque,
           model,
-          entry: dayjs(new Date()).format('ss:mm:HH DD/MM/YYYY'),
+          entry: new Date(),
           userId: request.user.sub,
         },
       })

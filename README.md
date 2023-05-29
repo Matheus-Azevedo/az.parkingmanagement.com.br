@@ -62,3 +62,5 @@ Para a implementação, você pode escolher a tecnologia de sua preferência. No
     
 -   `npm i js-cookie`: Instala o pacote "js-cookie", que facilita a manipulação de cookies no aplicativo.
 -   `npm i --save-dev @types/js-cookie`: Instala o pacote "@types/js-cookie" como uma dependência de desenvolvimento, que fornece definições de tipo para o pacote "js-cookie".
+
+-   `npm i dayjs` 
