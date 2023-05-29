@@ -29,7 +29,7 @@ export default async function User() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Welcome, {name}!</h1>
+      <h1 className="text-4xl font-bold">Welcome user, {name}!</h1>
       {vehicles.map((vehicle) => (
         <div
           key={vehicle.id}

@@ -34,7 +34,7 @@ export default async function Admin() {
   const currency: iCurrency[] = response2.data
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Welcome, {name}!</h1>
+      <h1 className="text-4xl font-bold">Welcome admin, {name}!</h1>
       <div className="h-2" />
       <h2 className="text-4xl font-bold">Vehicles</h2>
       <div className="flex flex-wrap justify-center">
