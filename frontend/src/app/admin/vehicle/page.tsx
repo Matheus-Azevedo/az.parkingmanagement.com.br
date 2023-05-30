@@ -15,10 +15,6 @@ export default function RegisterVehicle() {
 
     const formData = new FormData(event.currentTarget)
 
-    console.log(formData.get('plaque_field'))
-    console.log(formData.get('model_field'))
-    console.log(token)
-
     await api.post(
       '/vehicles',
       {

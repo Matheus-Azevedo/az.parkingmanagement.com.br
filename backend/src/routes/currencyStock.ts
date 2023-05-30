@@ -85,16 +85,15 @@ export async function currencyStockRoutes(app: FastifyInstance) {
 
       if (!currencyStockExists) {
         reply.status(statusCode.NOT_FOUND).send()
+      } else {
+        const updatedCurrencyStock = await prismaClient.currencyStock.update({
+          where: { id },
+          data: {
+            quantity: quantity + currencyStockExists.quantity,
+          },
+        })
+        reply.status(statusCode.OK).send(updatedCurrencyStock)
       }
-
-      const updatedCurrencyStock = await prismaClient.currencyStock.update({
-        where: { id },
-        data: {
-          quantity,
-        },
-      })
-
-      reply.status(statusCode.OK).send(updatedCurrencyStock)
     },
   )
 
