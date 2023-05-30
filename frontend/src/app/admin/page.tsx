@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode'
 import { iToken } from '@/interfaces/token'
 import { iCurrency } from '@/interfaces/currency'
 import Link from 'next/link'
+// import { Logout } from '@/components/Logout'
 
 export default async function Admin() {
   const token = cookies().get('token')?.value
@@ -74,6 +75,12 @@ export default async function Admin() {
         >
           Update Currency Stock
         </Link>
+        <a
+          href="/api/auth/logout"
+          className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
+        >
+          Logout
+        </a>
       </div>
       <div className="h-4" />
       <h2 className="text-4xl font-bold">Vehicles</h2>
