@@ -92,14 +92,12 @@ export async function vehiclesRoutes(app: FastifyInstance) {
         id: z.string().uuid(),
       })
       const bodySchema = z.object({
-        exit: z.string(),
-        totalSpent: z.number(),
-        amountPaid: z.number(),
-        credit: z.number(),
+        plaque: z.string(),
+        model: z.string(),
       })
 
       const { id } = idSchema.parse(request.params)
-      const { exit, totalSpent, amountPaid } = bodySchema.parse(request.body)
+      const { plaque, model } = bodySchema.parse(request.body)
 
       const vehicleExists = await prismaClient.vehicle.findUnique({
         where: { id },
@@ -112,9 +110,8 @@ export async function vehiclesRoutes(app: FastifyInstance) {
       const updateVehicle = await prismaClient.vehicle.update({
         where: { id },
         data: {
-          exit,
-          totalSpent,
-          amountPaid,
+          plaque,
+          model,
         },
       })
 

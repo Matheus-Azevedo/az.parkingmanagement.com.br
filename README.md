@@ -46,6 +46,11 @@ Para a implementação, você pode escolher a tecnologia de sua preferência. No
 -   `npm i @fastify/cors`: Instala o pacote Fastify CORS, que permite configurar as URLs que têm permissão para acessar a API de forma segura.
 -   `npm i dayjs`: Instala um pacote de data
 
+-   `npm install --save-dev jest`
+-   `npm install --save-dev ts-jest`
+-   `npm install --save-dev @types/jest` 
+-   `npx ts-jest config:init`
+
 # FRONTEND SETUP
 
 -   `npx create-next-app@latest web --use-npm`: Cria um novo aplicativo Next.js chamado "web" usando o pacote "create-next-app" com a versão mais recente, usando o npm como gerenciador de pacotes.
@@ -63,4 +68,6 @@ Para a implementação, você pode escolher a tecnologia de sua preferência. No
 -   `npm i js-cookie`: Instala o pacote "js-cookie", que facilita a manipulação de cookies no aplicativo.
 -   `npm i --save-dev @types/js-cookie`: Instala o pacote "@types/js-cookie" como uma dependência de desenvolvimento, que fornece definições de tipo para o pacote "js-cookie".
 
--   `npm i dayjs` 
+-   `npm i dayjs`
+
+-   `npm i --save-dev jest @babel/preset-typescript @types/jest`

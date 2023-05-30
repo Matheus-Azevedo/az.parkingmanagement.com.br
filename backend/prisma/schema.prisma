@@ -25,9 +25,6 @@ model Vehicle {
   plaque     String    @unique
   model      String
   entry      DateTime  @default(now())
-  exit       DateTime?
-  totalSpent Float?
-  amountPaid Float?
   userId     String
   user       User      @relation(fields: [userId], references: [id])
 }

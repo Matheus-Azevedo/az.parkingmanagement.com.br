@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "lint": "eslint src --ext .ts --fix",
-    "prisma": "npx prisma studio"
+    "prisma": "npx prisma studio",
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
