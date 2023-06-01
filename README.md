@@ -166,9 +166,12 @@ Como base no tempo estipulado por mim, que se iniciou em 24/05 e finalizou no di
 
 `A respeito do código no BACKEND`, por se tratar de um protótipo, decidi  concentrar os código em poucos arquivos, porém é antes de prosseguir com o projeto é necessário que seja feita a estruturação em um padrão de projeto.
 
+Por fim tanto no back quanto no front é necessário refatorar as chamadas de api para que sejam feitas com devido tratamento de erros. 
+
 `A respeito do testes`, foram implementados alguns testes no FRONTEND, porém ainda estão incompletos, e no BACKEND tive contratempo com as documentações dos frameworks para execução dos testes.
 
 Com um pouco mais tempo com certeza o projeto seria concluído adequadamente, sendo que para entrar em produção outros funcionalidades teriam que ser adicionadas, como por exemplo:
   -   Implementação de autenticação por redes sociais;
   -   Implementação do sistema de cartão de crédito, débito e pix;
+  -   Implementação de um design mais adequado. 
 
