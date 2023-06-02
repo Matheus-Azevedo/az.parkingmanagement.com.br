@@ -9,7 +9,7 @@ async function getAll(_request: FastifyRequest, reply: FastifyReply) {
     if (message) {
       reply.status(statusCode).send({ message })
     } else {
-      reply.status(statusCode).send({ data, message })
+      reply.status(statusCode).send({ data })
     }
   } catch (error) {
     reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })
@@ -26,7 +26,7 @@ async function getOne(request: FastifyRequest, reply: FastifyReply) {
     if (message) {
       reply.status(status).send({ message })
     } else {
-      reply.status(status).send({ data, message })
+      reply.status(status).send({ data })
     }
   } catch (error) {
     reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })
