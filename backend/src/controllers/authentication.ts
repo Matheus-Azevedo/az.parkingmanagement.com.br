@@ -23,9 +23,7 @@ async function login(request: FastifyRequest, reply: FastifyReply) {
       reply.status(status).send({ token })
     }
   } catch (error) {
-    reply
-      .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send({ message: 'Internal server error' })
+    reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })
   }
 }
 
@@ -35,7 +33,7 @@ async function register(request: FastifyRequest, reply: FastifyReply) {
   if (!registerInfo) {
     reply
       .status(statusCode.BAD_REQUEST)
-      .send({ message: 'Invalid login information' })
+      .send({ message: 'Invalid register information' })
   }
 
   try {
@@ -48,9 +46,7 @@ async function register(request: FastifyRequest, reply: FastifyReply) {
       reply.status(status).send({ token })
     }
   } catch (error) {
-    reply
-      .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send({ message: 'Internal server error' })
+    reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })
   }
 }
 
