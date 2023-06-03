@@ -84,11 +84,11 @@ async function deleteOne(request: FastifyRequest, reply: FastifyReply) {
     reply.status(statusCode.BAD_REQUEST).send({ message: 'Invalid params' })
   }
   try {
-    const { status, data, message } = await currencyServices().deleteOne(id)
+    const { status, message } = await currencyServices().deleteOne(id)
     if (message) {
       reply.status(status).send({ message })
     } else {
-      reply.status(status).send({ data })
+      reply.status(status).send()
     }
   } catch (error) {
     reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })

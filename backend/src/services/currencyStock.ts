@@ -26,7 +26,6 @@ async function create({ name, value, type, quantity }: iCurrency) {
   })
 
   if (currencyStockExists) {
-    // reply.status(statusCode.CONFLICT).send()
     return { status: statusCode.CONFLICT, message: 'Conflict' }
   }
 
@@ -39,7 +38,6 @@ async function create({ name, value, type, quantity }: iCurrency) {
     },
   })
 
-  // reply.status(statusCode.CREATED).send(newCurrencyStock)
   return { status: statusCode.CREATED, data: newCurrencyStock }
 }
 
@@ -70,11 +68,11 @@ async function deleteOne(id: string) {
     return { status: statusCode.NOT_FOUND, message: 'Not found' }
   }
 
-  const deletedCurrencyStock = await prismaClient.currencyStock.delete({
+  await prismaClient.currencyStock.delete({
     where: { id },
   })
 
-  return { status: statusCode.OK, data: deletedCurrencyStock }
+  return { status: statusCode.DELETED }
 }
 
 export function currencyServices() {
