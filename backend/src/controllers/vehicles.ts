@@ -10,7 +10,7 @@ async function getAll(request: FastifyRequest, reply: FastifyReply) {
     if (message) {
       reply.status(status).send({ message })
     } else {
-      reply.status(status).send({ data })
+      reply.status(status).send(data)
     }
   } catch (error) {
     reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })
@@ -25,7 +25,7 @@ async function getOne(request: FastifyRequest, reply: FastifyReply) {
     if (message) {
       reply.status(status).send({ message })
     } else {
-      reply.status(status).send({ data })
+      reply.status(status).send(data)
     }
   } catch (error) {
     reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })
@@ -44,7 +44,7 @@ async function create(request: FastifyRequest, reply: FastifyReply) {
     if (message) {
       reply.status(status).send({ message })
     } else {
-      reply.status(status).send({ data })
+      reply.status(status).send(data)
     }
   } catch (error) {
     reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })
@@ -63,7 +63,7 @@ async function update(request: FastifyRequest, reply: FastifyReply) {
     if (message) {
       reply.status(status).send({ message })
     } else {
-      reply.status(status).send({ data })
+      reply.status(status).send(data)
     }
   } catch (error) {
     reply.status(statusCode.INTERNAL_SERVER_ERROR).send({ message: error })
