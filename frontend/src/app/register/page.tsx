@@ -1,31 +1,16 @@
 'use client'
 
-import Cookies from 'js-cookie'
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent } from 'react'
 import { IoCarSportSharp } from 'react-icons/io5'
-import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
+import { ButtonSubmit } from '@/components/ButtonSubmit'
+import { registerForm } from '@/functions/registerForm'
 
 export default function Register() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [role, setRole] = useState('')
   const router = useRouter()
 
   async function submitHandler(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    const { data } = await api.post('/register', {
-      name,
-      email,
-      password,
-      role,
-    })
-
-    const { token } = data
-
-    Cookies.set('token', token)
+    await registerForm(event)
 
     router.push('/login')
   }
@@ -45,9 +30,8 @@ export default function Register() {
           <input
             type="text"
             id="name_field"
+            name="name"
             className="form-control w-full rounded-full"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="form-outline mb-4">
@@ -57,9 +41,8 @@ export default function Register() {
           <input
             type="email"
             id="email_field"
+            name="email"
             className="form-control w-full rounded-full"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="form-outline mb-4">
@@ -68,32 +51,22 @@ export default function Register() {
           </label>
           <input
             type="password"
+            name="password"
             id="password_field"
             className="form-control w-full rounded-full"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         Role
         <div>
-          <select
-            name="role"
-            value={role}
-            className="rounded-full"
-            onChange={(e) => setRole(e.target.value)}
-          >
+          <select name="role" className="rounded-full">
             <option value="">Select role</option>
             <option value="user">User</option>
             <option value="admin">Admin</option>
           </select>
         </div>
+        <div className="h-4" />
         <div className="text-center">
-          <button
-            type="submit"
-            className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
-          >
-            Register
-          </button>
+          <ButtonSubmit props="Register" />
         </div>
       </form>
     </main>

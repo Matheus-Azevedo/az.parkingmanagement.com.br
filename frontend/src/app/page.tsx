@@ -1,4 +1,4 @@
-import { LinkHomePage } from '@/components/LinkToPage'
+import { LinkToPage } from '@/components/LinkToPage'
 import { IoCarSportSharp } from 'react-icons/io5'
 
 export default function Home() {
@@ -9,9 +9,9 @@ export default function Home() {
         Welcome to Parking Management!
       </h1>
       <div className="flex items-center justify-center p-4">
-        <LinkHomePage props="login" />
+        <LinkToPage prop1="/login" prop2="Login" />
         <div className="w-1" />
-        <LinkHomePage props="register" />
+        <LinkToPage prop1="/register" prop2="Register" />
       </div>
     </main>
   )

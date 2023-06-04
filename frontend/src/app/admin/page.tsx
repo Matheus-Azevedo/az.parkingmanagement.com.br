@@ -5,8 +5,8 @@ import dayjs from 'dayjs'
 import jwtDecode from 'jwt-decode'
 import { iToken } from '@/interfaces/token'
 import { iCurrency } from '@/interfaces/currency'
-import Link from 'next/link'
-// import { Logout } from '@/components/Logout'
+import { Logout } from '@/components/Logout'
+import { LinkToPage } from '@/components/LinkToPage'
 
 export default async function Admin() {
   const token = cookies().get('token')?.value
@@ -62,25 +62,10 @@ export default async function Admin() {
       <h1 className="text-4xl font-bold">Welcome admin, {name}!</h1>
       <div className="h-4" />
       <div className="flex flex-col items-center justify-center">
-        <Link
-          href="/admin/vehicle"
-          className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
-        >
-          Register Vehicle
-        </Link>
+        <LinkToPage prop1="/admin/vehicle" prop2="Register Vehicle" />
         <div className="w-4" />
-        <Link
-          href="/admin/currency"
-          className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
-        >
-          Update Currency Stock
-        </Link>
-        <a
-          href="/api/auth/logout"
-          className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
-        >
-          Logout
-        </a>
+        <LinkToPage prop1="/admin/currency" prop2="Update Currency Stock" />
+        <Logout />
       </div>
       <div className="h-4" />
       <h2 className="text-4xl font-bold">Vehicles</h2>

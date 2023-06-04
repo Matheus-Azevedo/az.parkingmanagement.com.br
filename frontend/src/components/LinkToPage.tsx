@@ -1,14 +1,18 @@
 import Link from 'next/link'
 
-export function LinkHomePage({ props }: { props: string }) {
-  const capitalizedProps = props.charAt(0).toUpperCase() + props.slice(1)
+interface iLinkToPage {
+  prop1: string
+  prop2: string
+}
+
+export function LinkToPage({ prop1, prop2 }: iLinkToPage) {
   return (
     <Link
-      href={`/${props}`}
+      href={prop1}
       className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
     >
       {' '}
-      {capitalizedProps}{' '}
+      {prop2}{' '}
     </Link>
   )
 }

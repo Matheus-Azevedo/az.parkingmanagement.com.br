@@ -2,14 +2,10 @@
 
 import Cookies from 'js-cookie'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 export function Logout() {
-  const router = useRouter()
-
   function logout() {
     Cookies.remove('token')
-    router.push('/')
   }
   return (
     <Link
