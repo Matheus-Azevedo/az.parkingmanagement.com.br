@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { LinkHomePage } from '@/components/LinkToPage'
 import { IoCarSportSharp } from 'react-icons/io5'
 
 export default function Home() {
@@ -9,21 +9,9 @@ export default function Home() {
         Welcome to Parking Management!
       </h1>
       <div className="flex items-center justify-center p-4">
-        <Link
-          href="/login"
-          className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
-        >
-          {' '}
-          Login{' '}
-        </Link>
+        <LinkHomePage props="login" />
         <div className="w-1" />
-        <Link
-          href="/register"
-          className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
-        >
-          {' '}
-          Register{' '}
-        </Link>
+        <LinkHomePage props="register" />
       </div>
     </main>
   )
