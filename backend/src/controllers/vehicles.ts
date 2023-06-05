@@ -33,13 +33,12 @@ async function getOne(request: FastifyRequest, reply: FastifyReply) {
 }
 
 async function create(request: FastifyRequest, reply: FastifyReply) {
-  const { plaque, model } = bodySchema.parse(request.body)
-  const { user } = request
+  const { plaque, model, email } = bodySchema.parse(request.body)
   try {
     const { status, data, message } = await vehiclesServices().create(
       plaque,
       model,
-      user,
+      email,
     )
     if (message) {
       reply.status(status).send({ message })

@@ -13,7 +13,7 @@ async function getAll(user: iUser) {
   } else {
     vehicles = await prismaClient.vehicle.findMany({
       where: {
-        userId: user.sub,
+        userEmail: user.email,
       },
       orderBy: {
         entry: 'asc',
@@ -34,14 +34,14 @@ async function getOne(id: string, user: iUser) {
   if (!vehicle) {
     return { status: statusCode.NOT_FOUND, message: 'Not found' }
   }
-  if (vehicle?.userId !== user.sub) {
+  if (vehicle?.userEmail !== user.email) {
     return { status: statusCode.UNAUTHORIZED, message: 'Unauthorized' }
   } else {
     return { status: statusCode.OK, data: vehicle }
   }
 }
 
-async function create(plaque: string, model: string, user: iUser) {
+async function create(plaque: string, model: string, email: string) {
   const vehicleExists = await prismaClient.vehicle.findFirst({
     where: { plaque },
   })
@@ -55,7 +55,7 @@ async function create(plaque: string, model: string, user: iUser) {
       plaque,
       model,
       entry: new Date(),
-      userId: user.sub,
+      userEmail: email,
     },
   })
   return { status: statusCode.CREATED, data: newVehicle }

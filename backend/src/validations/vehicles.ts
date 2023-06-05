@@ -7,4 +7,5 @@ export const idSchema = z.object({
 export const bodySchema = z.object({
   plaque: z.string(),
   model: z.string(),
+  email: z.string().email(),
 })

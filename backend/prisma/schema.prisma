@@ -25,8 +25,8 @@ model Vehicle {
   plaque     String    @unique
   model      String
   entry      DateTime  @default(now())
-  userId     String
-  user       User      @relation(fields: [userId], references: [id])
+  userEmail     String
+  user       User      @relation(fields: [userEmail], references: [email])
 }
 
 model CurrencyStock {
