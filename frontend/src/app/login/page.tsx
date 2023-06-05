@@ -29,7 +29,7 @@ export default function Login() {
         <h1 className="mb-4 text-center">Login</h1>
         <InputEmailAddress />
         <InputPassword />
-        <ButtonSubmit props="Sign in" />
+        <ButtonSubmit btnName="Sign in" />
         <div className="text-center">
           <p>
             Not a member? <Link href="/register">Register</Link>

@@ -47,7 +47,7 @@ export default function Register() {
           </select>
         </div>
         <div className="h-4" />
-        <ButtonSubmit props="Register" />
+        <ButtonSubmit btnName="Register" />
       </form>
     </main>
   )

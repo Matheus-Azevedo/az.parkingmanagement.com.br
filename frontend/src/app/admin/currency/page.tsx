@@ -53,7 +53,7 @@ export default function UpdateCurrency() {
           />
         </div>
         <div className="h-4" />
-        <ButtonSubmit props="Update" />
+        <ButtonSubmit btnName="Update" />
       </form>
     </main>
   )

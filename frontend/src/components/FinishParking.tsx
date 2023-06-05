@@ -1,16 +1,15 @@
 'use client'
 
 import { submitPayment } from '@/functions/submitPayment'
-import { iProps } from '@/interfaces/props'
 import { useRouter } from 'next/navigation'
 import { FormEvent } from 'react'
 import { ButtonSubmit } from './ButtonSubmit'
 
-export function FinishParking(props: iProps) {
+export function FinishParking({ value }: { value: number }) {
   const router = useRouter()
 
   async function handleSubmitPayment(event: FormEvent<HTMLFormElement>) {
-    submitPayment(event, props)
+    submitPayment(event, value)
     router.push('/')
   }
 
@@ -36,7 +35,7 @@ export function FinishParking(props: iProps) {
         />
       </div>
       <div className="h-4" />
-      <ButtonSubmit props="Finish Parking" />
+      <ButtonSubmit btnName="Finish Parking" />
     </form>
   )
 }

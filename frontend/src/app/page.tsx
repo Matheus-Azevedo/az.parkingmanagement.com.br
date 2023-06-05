@@ -9,9 +9,9 @@ export default function Home() {
         Welcome to Parking Management!
       </h1>
       <div className="flex items-center justify-center p-4">
-        <LinkToPage prop1="/login" prop2="Login" />
+        <LinkToPage href="/login" btnName="Login" />
         <div className="w-1" />
-        <LinkToPage prop1="/register" prop2="Register" />
+        <LinkToPage href="/register" btnName="Register" />
       </div>
     </main>
   )

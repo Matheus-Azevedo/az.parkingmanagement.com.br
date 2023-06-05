@@ -35,7 +35,7 @@ export default async function User() {
           <p>Total Spent: R$ {totalSpent}</p>
           <p>{vehicle.AmountPaid}</p>
           <div className="h-4" />
-          <FinishParking props={totalSpent} />
+          <FinishParking value={totalSpent} />
         </div>
       ))}
     </main>

@@ -62,9 +62,9 @@ export default async function Admin() {
       <h1 className="text-4xl font-bold">Welcome admin, {name}!</h1>
       <div className="h-4" />
       <div className="flex flex-col items-center justify-center">
-        <LinkToPage prop1="/admin/vehicle" prop2="Register Vehicle" />
+        <LinkToPage href="/admin/vehicle" btnName="Register Vehicle" />
         <div className="w-4" />
-        <LinkToPage prop1="/admin/currency" prop2="Update Currency Stock" />
+        <LinkToPage href="/admin/currency" btnName="Update Currency Stock" />
         <Logout />
       </div>
       <div className="h-4" />

@@ -19,7 +19,6 @@ export async function registerForm(event: FormEvent<HTMLFormElement>) {
 
     Cookies.set('token', token)
   } catch (error) {
-    // Tratar o erro, se necessário
     console.error(error)
   }
 }

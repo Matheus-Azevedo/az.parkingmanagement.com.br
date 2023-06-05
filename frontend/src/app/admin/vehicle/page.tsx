@@ -46,7 +46,7 @@ export default function RegisterVehicle() {
           />
         </div>
         <InputEmailAddress />
-        <ButtonSubmit props="Register" />
+        <ButtonSubmit btnName="Register" />
       </form>
     </main>
   )
