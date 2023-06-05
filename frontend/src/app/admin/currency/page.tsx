@@ -3,44 +3,14 @@
 import { FormEvent } from 'react'
 import { IoCarSportSharp } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
-import { api } from '@/lib/api'
-import Cookies from 'js-cookie'
-import { iCurrency } from '@/interfaces/currency'
+import { ButtonSubmit } from '@/components/ButtonSubmit'
+import { registerCurrencyUpdateForm } from '@/functions/registerCurrencyUpdateForm'
 
 export default function UpdateCurrency() {
   const router = useRouter()
 
   async function submitHandler(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const token = Cookies.get('token')
-
-    const formData = new FormData(event.currentTarget)
-
-    const response = await api.get('/currency', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-
-    const currencies: iCurrency[] = response.data
-
-    const currency = currencies.find(
-      (curr) => curr.name === formData.get('role'),
-    )
-
-    const id = currency?.id
-
-    await api.put(
-      `/currency/${id}`,
-      {
-        quantity: Number(formData.get('quantity')),
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    )
+    await registerCurrencyUpdateForm(event)
 
     router.push('/admin')
   }
@@ -83,14 +53,7 @@ export default function UpdateCurrency() {
           />
         </div>
         <div className="h-4" />
-        <div className="text-center">
-          <button
-            type="submit"
-            className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
-          >
-            Update
-          </button>
-        </div>
+        <ButtonSubmit props="Update" />
       </form>
     </main>
   )

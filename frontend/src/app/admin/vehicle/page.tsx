@@ -3,32 +3,15 @@
 import { FormEvent } from 'react'
 import { IoCarSportSharp } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
-import { api } from '@/lib/api'
-import Cookies from 'js-cookie'
+import { InputEmailAddress } from '@/components/InputEmailAddress'
+import { ButtonSubmit } from '@/components/ButtonSubmit'
+import { registerVehicleForm } from '@/functions/registerVehicleForm'
 
 export default function RegisterVehicle() {
   const router = useRouter()
 
   async function submitHandler(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const token = Cookies.get('token')
-
-    const formData = new FormData(event.currentTarget)
-
-    await api.post(
-      '/vehicles',
-      {
-        plaque: formData.get('plaque_field'),
-        model: formData.get('model_field'),
-        email: formData.get('email_field'),
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    )
-
+    registerVehicleForm(event)
     router.push('/admin')
   }
 
@@ -51,7 +34,6 @@ export default function RegisterVehicle() {
             className="form-control w-full rounded-full"
           />
         </div>
-
         <div className="form-outline mb-4">
           <label className="form-label" htmlFor="model_field">
             Model
@@ -63,27 +45,8 @@ export default function RegisterVehicle() {
             className="form-control w-full rounded-full"
           />
         </div>
-
-        <div className="form-outline mb-4">
-          <label className="form-label" htmlFor="email_field">
-            Email
-          </label>
-          <input
-            type="text"
-            id="email_field"
-            name="email_field"
-            className="form-control w-full rounded-full"
-          />
-        </div>
-
-        <div className="text-center">
-          <button
-            type="submit"
-            className="btn btn-block btn-primary btn-block mb-4 rounded-full bg-gray-500 px-5 py-3 hover:bg-gray-400"
-          >
-            Register
-          </button>
-        </div>
+        <InputEmailAddress />
+        <ButtonSubmit props="Register" />
       </form>
     </main>
   )

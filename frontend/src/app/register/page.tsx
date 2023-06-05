@@ -5,6 +5,8 @@ import { IoCarSportSharp } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
 import { ButtonSubmit } from '@/components/ButtonSubmit'
 import { registerForm } from '@/functions/registerForm'
+import { InputEmailAddress } from '@/components/InputEmailAddress'
+import { InputPassword } from '@/components/InputPassword'
 
 export default function Register() {
   const router = useRouter()
@@ -34,28 +36,8 @@ export default function Register() {
             className="form-control w-full rounded-full"
           />
         </div>
-        <div className="form-outline mb-4">
-          <label className="form-label" htmlFor="email_field">
-            Email address
-          </label>
-          <input
-            type="email"
-            id="email_field"
-            name="email_field"
-            className="form-control w-full rounded-full"
-          />
-        </div>
-        <div className="form-outline mb-4">
-          <label className="form-label" htmlFor="password_field">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password_field"
-            id="password_field"
-            className="form-control w-full rounded-full"
-          />
-        </div>
+        <InputEmailAddress />
+        <InputPassword />
         Role
         <div>
           <select name="role_field" className="rounded-full">
@@ -65,9 +47,7 @@ export default function Register() {
           </select>
         </div>
         <div className="h-4" />
-        <div className="text-center">
-          <ButtonSubmit props="Register" />
-        </div>
+        <ButtonSubmit props="Register" />
       </form>
     </main>
   )
