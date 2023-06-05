@@ -9,10 +9,10 @@ export async function registerForm(event: FormEvent<HTMLFormElement>) {
     const formData = new FormData(event.currentTarget)
 
     const { data } = await api.post('/register', {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-      role: formData.get('role') as string,
+      name: formData.get('name_field') as string,
+      email: formData.get('email_field') as string,
+      password: formData.get('password_field') as string,
+      role: formData.get('role_field') as string,
     })
 
     const { token } = data

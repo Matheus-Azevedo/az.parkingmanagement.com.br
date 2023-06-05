@@ -30,7 +30,7 @@ export default function Register() {
           <input
             type="text"
             id="name_field"
-            name="name"
+            name="name_field"
             className="form-control w-full rounded-full"
           />
         </div>
@@ -41,7 +41,7 @@ export default function Register() {
           <input
             type="email"
             id="email_field"
-            name="email"
+            name="email_field"
             className="form-control w-full rounded-full"
           />
         </div>
@@ -51,14 +51,14 @@ export default function Register() {
           </label>
           <input
             type="password"
-            name="password"
+            name="password_field"
             id="password_field"
             className="form-control w-full rounded-full"
           />
         </div>
         Role
         <div>
-          <select name="role" className="rounded-full">
+          <select name="role_field" className="rounded-full">
             <option value="">Select role</option>
             <option value="user">User</option>
             <option value="admin">Admin</option>

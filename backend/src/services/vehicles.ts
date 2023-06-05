@@ -13,7 +13,7 @@ async function getAll(user: iUser) {
   } else {
     vehicles = await prismaClient.vehicle.findMany({
       where: {
-        userEmail: user.email,
+        userId: user.sub,
       },
       orderBy: {
         entry: 'asc',
@@ -34,7 +34,7 @@ async function getOne(id: string, user: iUser) {
   if (!vehicle) {
     return { status: statusCode.NOT_FOUND, message: 'Not found' }
   }
-  if (vehicle?.userEmail !== user.email) {
+  if (vehicle?.userId !== user.sub) {
     return { status: statusCode.UNAUTHORIZED, message: 'Unauthorized' }
   } else {
     return { status: statusCode.OK, data: vehicle }
@@ -50,12 +50,20 @@ async function create(plaque: string, model: string, email: string) {
     return { status: statusCode.CONFLICT, message: 'Conflict' }
   }
 
+  const user = await prismaClient.user.findUnique({
+    where: { email },
+  })
+
+  if (!user) {
+    return { status: statusCode.NOT_FOUND, message: 'Not found' }
+  }
+
   const newVehicle = await prismaClient.vehicle.create({
     data: {
       plaque,
       model,
       entry: new Date(),
-      userEmail: email,
+      userId: user.id,
     },
   })
   return { status: statusCode.CREATED, data: newVehicle }

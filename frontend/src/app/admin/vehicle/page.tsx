@@ -20,6 +20,7 @@ export default function RegisterVehicle() {
       {
         plaque: formData.get('plaque_field'),
         model: formData.get('model_field'),
+        email: formData.get('email_field'),
       },
       {
         headers: {
@@ -59,6 +60,18 @@ export default function RegisterVehicle() {
             type="text"
             id="model_field"
             name="model_field"
+            className="form-control w-full rounded-full"
+          />
+        </div>
+
+        <div className="form-outline mb-4">
+          <label className="form-label" htmlFor="email_field">
+            Email
+          </label>
+          <input
+            type="text"
+            id="email_field"
+            name="email_field"
             className="form-control w-full rounded-full"
           />
         </div>

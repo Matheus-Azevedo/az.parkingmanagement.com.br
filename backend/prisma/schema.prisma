@@ -21,12 +21,12 @@ model User {
 }
 
 model Vehicle {
-  id         String    @id @default(uuid())
-  plaque     String    @unique
-  model      String
-  entry      DateTime  @default(now())
-  userEmail     String
-  user       User      @relation(fields: [userEmail], references: [email])
+  id        String   @id @default(uuid())
+  plaque    String   @unique
+  model     String
+  entry     DateTime @default(now())
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model CurrencyStock {

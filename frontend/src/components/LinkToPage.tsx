@@ -1,9 +1,5 @@
+import { iLinkToPage } from '@/interfaces/linkToPage'
 import Link from 'next/link'
-
-interface iLinkToPage {
-  prop1: string
-  prop2: string
-}
 
 export function LinkToPage({ prop1, prop2 }: iLinkToPage) {
   return (

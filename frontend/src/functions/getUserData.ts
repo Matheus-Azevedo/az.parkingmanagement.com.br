@@ -16,7 +16,7 @@ export async function getUserData() {
     const { sub, name } = decryptedToken
     const response = await api.get('/vehicles', {
       params: {
-        id: sub,
+        userId: sub,
       },
       headers: {
         Authorization: `Bearer ${token}`,
@@ -26,11 +26,17 @@ export async function getUserData() {
 
     const entry = dayjs(vehicles[0].entry)
     const exit = dayjs()
-    const totalTime = dayjs(exit).diff(dayjs(entry), 'hour')
+    let totalTime = dayjs(exit).diff(dayjs(entry), 'hour')
+    if (totalTime < 1) {
+      totalTime = 1
+    }
+
+    const carValue = 5
+    const motorcycleValue = 2
     const totalSpent =
       vehicles[0].model === 'CAR'
-        ? Number(totalTime) * 5
-        : Number(totalTime) * 2
+        ? Number(totalTime) * carValue
+        : Number(totalTime) * motorcycleValue
 
     return { name, vehicles, entry, exit, totalTime, totalSpent }
   } catch (error) {
