@@ -5,19 +5,19 @@ Este é um sistema de cobrança e controle para um estacionamento. O sistema reg
 
 ## Funcionalidades
 
--   Registro de entrada e saída de veículos. (atingido)
--   Cálculo automático do valor a ser cobrado com base no tempo de permanência e tipo de veículo. (atingido)
--   Visualização do estoque de moedas e notas. (atingido)
--   Registro da movimentação diária dos clientes. (atingido)
+-   Registro de entrada e saída de veículos.
+-   Cálculo automático do valor a ser cobrado com base no tempo de permanência e tipo de veículo.
+-   Visualização do estoque de moedas e notas.
+-   Registro da movimentação diária dos clientes.
 -   Retorno de troco adequado com base nas notas e moedas disponíveis em estoque.
 -   PLUS: Ter a aplicação publicada no GCP.
 -   PLUS: Estar em uma esteira de CI/CD integrado com o Git.
 
 ## Requisitos de Implementação
 
--   Separação entre front-end e back-end. (atingido)
--   Comunicação entre front-end e back-end por meio de uma API REST com autenticação JWT. (atingido)
--   Utilização do banco de dados PostgreSQL para armazenamento dos dados. (atingido)
+-   Separação entre front-end e back-end.
+-   Comunicação entre front-end e back-end por meio de uma API REST com autenticação JWT.
+-   Utilização do banco de dados PostgreSQL para armazenamento dos dados.
 
 # Tecnologias Utilizadas
 
@@ -174,4 +174,10 @@ Com um pouco mais tempo com certeza o projeto seria concluído adequadamente, se
   -   Implementação de autenticação por redes sociais;
   -   Implementação do sistema de cartão de crédito, débito e pix;
   -   Implementação de um design mais adequado. 
+
+## Atualizações
+
+`Refatoração`:
+  -   Backend: realizado um tratamento de erros inicial e foi posto em arquitetura de camadas baseada em MVC.
+  -   Front: realizado a componentização do código e iniciou-se o tratamento de erros.
 
