@@ -1,12 +1,11 @@
 'use client'
 
 import { FormEvent } from 'react'
-import { IoCarSportSharp } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
 import { ButtonSubmit } from '@/components/ButtonSubmit'
 import { registerCurrencyUpdateForm } from '@/functions/registerCurrencyUpdateForm'
 
-export default function UpdateCurrency() {
+export default function NewCurrency() {
   const router = useRouter()
 
   async function submitHandler(event: FormEvent<HTMLFormElement>) {
@@ -16,16 +15,16 @@ export default function UpdateCurrency() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <IoCarSportSharp className="h-24 w-24" />
-      <h1 className="text-4xl font-bold">Register Vehicle</h1>
+    <main className="flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold">Update Stock</h1>
+      <div className="h-4" />
       <form
         onSubmit={submitHandler}
         className="border-secondary rounded border p-4"
       >
         Select the Currency
-        <div>
-          <select name="role" className="rounded-full">
+        <div className="form-outline mb-4">
+          <select name="role" className="form-control w-full rounded-full">
             <option value="">Select role</option>
             <option value="Um-Centavo">Um Centavo</option>
             <option value="Cinco-Centavos">Cinco Centavos</option>
@@ -43,13 +42,13 @@ export default function UpdateCurrency() {
           </select>
         </div>
         <div className="h-4" />
-        <div className="flex flex-col">
+        <div className="form-outline mb-4">
           <label htmlFor="quantity">Quantity</label>
           <input
             type="number"
             name="quantity"
             id="quantity"
-            className="rounded-full"
+            className="form-control w-full rounded-full"
           />
         </div>
         <div className="h-4" />

@@ -1,7 +1,6 @@
 'use client'
 
 import { FormEvent } from 'react'
-import { IoCarSportSharp } from 'react-icons/io5'
 import { useRouter } from 'next/navigation'
 import { InputEmailAddress } from '@/components/InputEmailAddress'
 import { ButtonSubmit } from '@/components/ButtonSubmit'
@@ -16,9 +15,9 @@ export default function RegisterVehicle() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <IoCarSportSharp className="h-24 w-24" />
+    <main className="flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold">Register Vehicle</h1>
+      <div className="h-4" />
       <form
         onSubmit={submitHandler}
         className="border-secondary rounded border p-4"

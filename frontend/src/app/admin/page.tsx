@@ -1,105 +1,38 @@
-import { cookies } from 'next/headers'
-import { api } from '@/lib/api'
-import { iVehicle } from '@/interfaces/vehicle'
+'use client'
+
+import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
-import jwtDecode from 'jwt-decode'
-import { iToken } from '@/interfaces/token'
-import { iCurrency } from '@/interfaces/currency'
-import { Logout } from '@/components/Logout'
-import { LinkToPage } from '@/components/LinkToPage'
 
-export default async function Admin() {
-  const token = cookies().get('token')?.value
-  if (!token) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center p-24">
-        <h1 className="text-4xl font-bold">You are not logged in!</h1>
-      </div>
-    )
-  }
+export default function Admin() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [currentTime, setCurrentTime] = useState('')
+  const [currentDate, setCurrentDate] = useState('')
 
-  const decryptedToken: iToken = jwtDecode(token)
-  const { name, role } = decryptedToken
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = dayjs()
+      setCurrentTime(now.format('HH:mm:ss'))
+      setCurrentDate(now.format('YYYY-MM-DD'))
+      setIsLoading(false)
+    }, 1000)
 
-  if (role !== 'admin') {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center p-24">
-        <h1 className="text-4xl font-bold">You are not logged in!</h1>
-      </div>
-    )
-  }
-
-  const response = await api.get('/vehicles', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-  const vehicles: iVehicle[] = response.data
-
-  const response2 = await api.get('/currency', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-
-  const currency: iCurrency[] = response2.data
-
-  const totalCurrency = currency.reduce((acc, curr) => {
-    if (curr.type === 'COIN') {
-      acc = acc + curr.value * 0.01 * curr.quantity
-    } else {
-      acc = acc + curr.value * 1 * curr.quantity
+    return () => {
+      clearInterval(timer)
     }
-    return acc
-  }, 0)
+  }, [])
 
-  const formattedCurrency = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(totalCurrency)
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Welcome admin, {name}!</h1>
-      <div className="h-4" />
+  if (isLoading) {
+    return (
       <div className="flex flex-col items-center justify-center">
-        <LinkToPage href="/admin/vehicle" btnName="Register Vehicle" />
-        <div className="w-4" />
-        <LinkToPage href="/admin/currency" btnName="Update Currency Stock" />
-        <Logout />
+        <h1 className="text-4xl font-bold">Loading...</h1>
       </div>
-      <div className="h-4" />
-      <h2 className="text-4xl font-bold">Vehicles</h2>
-      <div className="flex flex-wrap justify-center">
-        {vehicles.map((vehicle) => (
-          <div
-            key={vehicle.id}
-            className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-500 p-6"
-          >
-            <h2>{vehicle.plaque}</h2>
-            <p>{vehicle.model}</p>
-            <p>{dayjs(vehicle.entry).format('DD/MM/YYYY HH:mm')}</p>
-            <p>
-              {vehicle.exit && dayjs(vehicle.exit).format('DD/MM/YYYY HH:mm')}
-            </p>
-            <p>{vehicle.totalSpent}</p>
-            <p>{vehicle.AmountPaid}</p>
-          </div>
-        ))}
-      </div>
-      <div className="h-4" />
-      <h2 className="text-4xl font-bold">Currency Stock</h2>
-      <h3 className="text-2xl font-bold">Total: {formattedCurrency}</h3>
-      <div className="flex flex-wrap justify-center">
-        {currency.map((currency) => (
-          <div
-            key={currency.id}
-            className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-500 p-6"
-          >
-            <h2>{currency.name}</h2>
-            <p>Quantity: {currency.quantity}</p>
-          </div>
-        ))}
-      </div>
+    )
+  }
+
+  return (
+    <main className="flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold">Hora: {currentTime}</h1>
+      <h1 className="text-4xl font-bold">Data: {currentDate}</h1>
     </main>
   )
 }
