@@ -26,19 +26,19 @@ export default function NewCurrency() {
         <div className="form-outline mb-4">
           <select name="role" className="form-control w-full rounded-full">
             <option value="">Select role</option>
-            <option value="Um-Centavo">Um Centavo</option>
-            <option value="Cinco-Centavos">Cinco Centavos</option>
-            <option value="Dez-Centavos">Dez Centavos</option>
-            <option value="Vinte-Cinco-Centavos">Vinte Cinco Centavos</option>
-            <option value="Cinquenta-Centavos">Cinquenta Centavos</option>
-            <option value="Um-Real">Um Real</option>
-            <option value="Dois-Reais">Dois Reais</option>
-            <option value="Cinco-Reais">Cinco Reais</option>
-            <option value="Dez-Reais">Dez Reais</option>
-            <option value="Vinte-Reais">Vinte Reais</option>
-            <option value="Cinquenta-Reais">Cinquenta Reais</option>
-            <option value="Cem-Reais">Cem Reais</option>
-            <option value="Duzentos-Reais">Duzentos Reais</option>
+            <option value="0.01">Um Centavo</option>
+            <option value="0.05">Cinco Centavos</option>
+            <option value="0.10">Dez Centavos</option>
+            <option value="0.25">Vinte Cinco Centavos</option>
+            <option value="0.50">Cinquenta Centavos</option>
+            <option value="1">Um Real</option>
+            <option value="2">Dois Reais</option>
+            <option value="5">Cinco Reais</option>
+            <option value="10">Dez Reais</option>
+            <option value="20">Vinte Reais</option>
+            <option value="50">Cinquenta Reais</option>
+            <option value="100">Cem Reais</option>
+            <option value="200">Duzentos Reais</option>
           </select>
         </div>
         <div className="h-4" />

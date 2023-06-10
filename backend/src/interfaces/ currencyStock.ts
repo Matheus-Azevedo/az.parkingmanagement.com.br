@@ -1,6 +1,6 @@
 export interface iCurrency {
-  name: string
-  value: number
+  value: string
   type: string
+  origin: string
   quantity: number
 }

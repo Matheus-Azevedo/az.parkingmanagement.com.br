@@ -20,9 +20,9 @@ export async function registerCurrencyUpdateForm(
 
     const currencies: iCurrency[] = response.data
 
-    const currency = currencies.find(
-      (curr) => curr.name === formData.get('role'),
-    )
+    const value = formData.get('role')
+
+    const currency = currencies.find((curr) => curr.value === value)
 
     const id = currency?.id
 
@@ -38,6 +38,6 @@ export async function registerCurrencyUpdateForm(
       },
     )
   } catch (error) {
-    console.log(error)
+    alert(`Erro: ${error}`)
   }
 }

@@ -17,23 +17,27 @@ export default async function User() {
       <h1 className="text-4xl font-bold">Welcome user, {name}!</h1>
       <div className="h-4" />
       <Logout />
-      {vehicles.map((vehicle) => (
-        <div
-          key={vehicle.id}
-          className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-500 p-24"
-        >
-          <h2>Plaque: {vehicle.plaque}</h2>
-          <p>Model: {vehicle.model}</p>
-          <p>Price per Hour: CAR $5 | MOTO $2</p>
-          <p>Entry: {entry.format('DD/MM/YYYY HH:mm')}</p>
-          <p>Exit: {exit.format('DD/MM/YYYY HH:mm')}</p>
-          <p>Total time: {totalTime} h</p>
-          <p>Total Spent: R$ {totalSpent}</p>
-          <p>{vehicle.AmountPaid}</p>
-          <div className="h-4" />
-          <FinishParking value={totalSpent} />
-        </div>
-      ))}
+      {vehicles.length > 0 ? (
+        vehicles.map((vehicle) => (
+          <div
+            key={vehicle.id}
+            className="flex flex-col items-center justify-center rounded-lg border-2 border-gray-500 p-24"
+          >
+            <h2>Plaque: {vehicle.plaque}</h2>
+            <p>Model: {vehicle.model}</p>
+            <p>Price per Hour: CAR $5 | MOTO $2</p>
+            <p>Entry: {entry.format('DD/MM/YYYY HH:mm')}</p>
+            <p>Exit: {exit.format('DD/MM/YYYY HH:mm')}</p>
+            <p>Total time: {totalTime} h</p>
+            <p>Total Spent: R$ {totalSpent}</p>
+            <p>{vehicle.AmountPaid}</p>
+            <div className="h-4" />
+            <FinishParking totalSpent={totalSpent} />
+          </div>
+        ))
+      ) : (
+        <h1 className="text-4xl font-bold">No vehicles parked</h1>
+      )}
     </main>
   )
 }

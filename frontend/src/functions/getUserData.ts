@@ -40,7 +40,6 @@ export async function getUserData() {
 
     return { name, vehicles, entry, exit, totalTime, totalSpent }
   } catch (error) {
-    console.error(error)
-    return null
+    alert(`Erro: ${error}`)
   }
 }

@@ -23,6 +23,6 @@ export async function registerVehicleForm(event: FormEvent<HTMLFormElement>) {
       },
     )
   } catch (error) {
-    console.log(error)
+    alert(`Erro: ${error}`)
   }
 }

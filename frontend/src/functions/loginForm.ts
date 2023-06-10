@@ -23,6 +23,6 @@ export async function loginForm(event: FormEvent<HTMLFormElement>) {
     const { role } = decryptedToken
     return role
   } catch (error) {
-    console.error(error)
+    alert(`Erro: ${error}`)
   }
 }

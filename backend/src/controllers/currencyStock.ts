@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { currencyServices } from '../services/currencyStock'
 import { statusCode } from '../utils/statusCode'
-import { bodySchema, idSchema } from '../validations/currencyStock'
+import { bodySchema, bodySchema2, idSchema } from '../validations/currencyStock'
 
 async function getAll(_request: FastifyRequest, reply: FastifyReply) {
   try {
@@ -34,15 +34,15 @@ async function getOne(request: FastifyRequest, reply: FastifyReply) {
 }
 
 async function create(request: FastifyRequest, reply: FastifyReply) {
-  const { name, value, type, quantity } = bodySchema.parse(request.body)
-  if (!name || !value || !type || !quantity) {
+  const { value, type, quantity, origin } = bodySchema.parse(request.body)
+  if (!value || !type || !quantity || !origin) {
     reply.status(statusCode.BAD_REQUEST).send({ message: 'Invalid body' })
   }
   try {
     const { status, data, message } = await currencyServices().create({
-      name,
       value,
       type,
+      origin,
       quantity,
     })
     if (message) {
@@ -57,7 +57,7 @@ async function create(request: FastifyRequest, reply: FastifyReply) {
 
 async function update(request: FastifyRequest, reply: FastifyReply) {
   const { id } = idSchema.parse(request.params)
-  const { quantity } = bodySchema.parse(request.body)
+  const { quantity } = bodySchema2.parse(request.body)
   if (!id || !quantity) {
     reply
       .status(statusCode.BAD_REQUEST)

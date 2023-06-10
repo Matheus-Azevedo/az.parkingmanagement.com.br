@@ -5,8 +5,12 @@ export const idSchema = z.object({
 })
 
 export const bodySchema = z.object({
-  name: z.string(),
-  value: z.number(),
+  value: z.string(),
   type: z.string(),
+  quantity: z.number(),
+  origin: z.string(),
+})
+
+export const bodySchema2 = z.object({
   quantity: z.number(),
 })

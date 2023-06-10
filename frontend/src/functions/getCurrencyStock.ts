@@ -10,21 +10,16 @@ export async function getCurrencyStock() {
       return null
     }
 
-    const response2 = await api.get('/currency', {
+    const response = await api.get('/currency', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
 
-    const currencies: iCurrency[] = response2.data
+    const currencies: iCurrency[] = response.data
 
     const totalCurrencies = currencies.reduce((acc, curr) => {
-      if (curr.type === 'COIN') {
-        acc = acc + curr.value * 0.01 * curr.quantity
-      } else {
-        acc = acc + curr.value * 1 * curr.quantity
-      }
-      return acc
+      return acc + parseFloat(curr.value) * curr.quantity
     }, 0)
 
     const formattedCurrencies = new Intl.NumberFormat('pt-BR', {
@@ -34,6 +29,6 @@ export async function getCurrencyStock() {
 
     return { currencies, formattedCurrencies }
   } catch (error) {
-    console.log(error)
+    alert(`Erro: ${error}`)
   }
 }

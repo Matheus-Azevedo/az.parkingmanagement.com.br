@@ -19,6 +19,6 @@ export async function getVehiclesList() {
 
     return { vehicles }
   } catch (error) {
-    console.log(error)
+    alert(`Erro: ${error}`)
   }
 }

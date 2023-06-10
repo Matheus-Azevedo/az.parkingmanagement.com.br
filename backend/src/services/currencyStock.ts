@@ -20,9 +20,9 @@ async function getOne(id: string) {
   return { status: statusCode.OK, data: currencyStock }
 }
 
-async function create({ name, value, type, quantity }: iCurrency) {
+async function create({ value, type, quantity, origin }: iCurrency) {
   const currencyStockExists = await prismaClient.currencyStock.findFirst({
-    where: { name },
+    where: { value },
   })
 
   if (currencyStockExists) {
@@ -34,7 +34,7 @@ async function create({ name, value, type, quantity }: iCurrency) {
       value,
       type,
       quantity,
-      name,
+      origin,
     },
   })
 
@@ -45,7 +45,6 @@ async function update(id: string, quantity: number) {
   const currencyStockExists = await prismaClient.currencyStock.findFirst({
     where: { id },
   })
-
   if (!currencyStockExists) {
     return { status: statusCode.NOT_FOUND, message: 'Not found' }
   } else {
