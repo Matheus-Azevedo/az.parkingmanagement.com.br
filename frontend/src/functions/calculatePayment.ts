@@ -36,19 +36,17 @@ export async function calculatePayment(values: string[], totalSpent: number) {
     const changeValue = sumValues - totalSpent
 
     if (changeValue === 0) {
-      return { noChange: changeValue }
+      return { message: 'Sem troco' }
     }
-    const change = calculateBankNotesAndCoins(changeValue)
+    const arrayOfChange = calculateBankNotesAndCoins(changeValue)
 
     const valueWithoutChange = []
-    const valueWithChange = []
     for (const currency of currencies) {
-      for (const value of change) {
+      for (const value of arrayOfChange) {
         if (currency.value === String(value)) {
           if (currency.quantity === 0) {
             valueWithoutChange.push(value)
           } else {
-            valueWithChange.push(value)
             await api.put(
               `/currency/${currency.id}`,
               {
@@ -64,8 +62,18 @@ export async function calculatePayment(values: string[], totalSpent: number) {
         }
       }
     }
-    return { valueWithChange, valueWithoutChange }
+
+    const credit = valueWithoutChange.reduce(
+      (acc, value) => acc + Number(value),
+      0,
+    )
+
+    await api.put(
+      '/user',
+      { credit },
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
   } catch (error) {
-    alert(`Erro: ${error}`)
+    console.error(error)
   }
 }

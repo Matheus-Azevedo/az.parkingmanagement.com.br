@@ -29,6 +29,6 @@ export async function getCurrencyStock() {
 
     return { currencies, formattedCurrencies }
   } catch (error) {
-    alert(`Erro: ${error}`)
+    console.error(error)
   }
 }

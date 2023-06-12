@@ -3,8 +3,15 @@
 import { useState, FormEvent, ChangeEvent } from 'react'
 import { ButtonSubmit } from './ButtonSubmit'
 import { calculatePayment } from '@/functions/calculatePayment'
+import { updateCredit } from '@/functions/updateCredit'
 
-export function FinishParking({ totalSpent }: { totalSpent: number }) {
+export function FinishParking({
+  finalPrice,
+  creditLeft,
+}: {
+  finalPrice: number
+  creditLeft: number
+}) {
   const [values, setSelectValues] = useState<string[]>([''])
 
   function handleSelectChange(
@@ -28,9 +35,11 @@ export function FinishParking({ totalSpent }: { totalSpent: number }) {
 
   async function handleSubmitPayment(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const data = await calculatePayment(values, totalSpent)
-    const { noChange, valueWithChange, valueWithoutChange } = data
-    console.log(noChange, valueWithChange, valueWithoutChange)
+    if (finalPrice !== 0) {
+      await calculatePayment(values, finalPrice)
+    }
+    await updateCredit(creditLeft)
+    window.location.reload()
   }
 
   return (

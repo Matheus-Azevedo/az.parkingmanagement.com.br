@@ -1,6 +1,6 @@
 import { statusCode } from '../utils/statusCode'
 import prismaClient from '../database/prismaClient'
-import { iCurrency } from '../interfaces/ currencyStock'
+import { iCurrency } from '../interfaces/currencyStock'
 
 async function getAll() {
   const currencyStock = await prismaClient.currencyStock.findMany()

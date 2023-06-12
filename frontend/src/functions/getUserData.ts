@@ -1,19 +1,9 @@
 import { api } from '@/lib/api'
 import { iVehicle } from '@/interfaces/vehicle'
 import dayjs from 'dayjs'
-import jwtDecode from 'jwt-decode'
-import { iToken } from '@/interfaces/token'
-import { cookies } from 'next/headers'
 
-export async function getUserData() {
+export async function getUserData(token: string, sub: string) {
   try {
-    const token = cookies().get('token')?.value
-    if (!token) {
-      return null
-    }
-
-    const decryptedToken: iToken = jwtDecode(token)
-    const { sub, name } = decryptedToken
     const response = await api.get('/vehicles', {
       params: {
         userId: sub,
@@ -38,8 +28,44 @@ export async function getUserData() {
         ? Number(totalTime) * carValue
         : Number(totalTime) * motorcycleValue
 
-    return { name, vehicles, entry, exit, totalTime, totalSpent }
+    const response2 = await api.get(`/user/${sub}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    const user = response2.data
+
+    let { credit } = user
+
+    if (!credit) {
+      credit = 0
+    }
+
+    let finalPrice = 0
+    let creditLeft = 0
+    if (credit > totalSpent) {
+      creditLeft = credit - totalSpent
+      finalPrice = 0
+    } else if (credit === totalSpent) {
+      creditLeft = 0
+      finalPrice = 0
+    } else {
+      creditLeft = 0
+      finalPrice = totalSpent - credit
+    }
+
+    return {
+      vehicles,
+      entry,
+      exit,
+      totalTime,
+      totalSpent,
+      credit,
+      finalPrice,
+      creditLeft,
+    }
   } catch (error) {
-    alert(`Erro: ${error}`)
+    console.error(error)
   }
 }

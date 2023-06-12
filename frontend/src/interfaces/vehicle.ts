@@ -3,8 +3,5 @@ export interface iVehicle {
   plaque: string
   model: string
   entry: Date
-  exit?: Date
-  totalSpent?: number
-  AmountPaid?: number
   userId: number
 }

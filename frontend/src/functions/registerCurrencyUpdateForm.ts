@@ -38,6 +38,6 @@ export async function registerCurrencyUpdateForm(
       },
     )
   } catch (error) {
-    alert(`Erro: ${error}`)
+    console.error(error)
   }
 }
