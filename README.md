@@ -72,6 +72,8 @@ ou
 
 -   `npx prisma migrate dev`: para executar migrations do prisma que vão preencher o banco.
 
+-   `npx prisma db seed`: Executa as seeders para popular o banco de dados com arquivos iniciais.
+
 -   `npx prisma studio`: abrirá no navegador o banco de dados com sua tabelas, é possível fazer operações nele através de um simples clique. 
 
 # Configurações realizadas
@@ -99,10 +101,14 @@ Os comandos listados configuram o ambiente de desenvolvimento backend e frontend
 -   `docker run --name parking_management -e POSTGRES_PASSWORD=admin -e POSTGRES_USER=root -e POSTGRES_DB=parking_management -p 5432:5432 -d postgres`: Inicia um contêiner Docker com o PostgreSQL para o projeto.
     
 -   `npm i prisma -D`: Instala o ORM Prisma como dependência de desenvolvimento no projeto.
+
+-   `npm i -D ts-node typescript @types/node`
     
 -   `npx prisma init`: Inicializa o Prisma no projeto.
     
 -   `npx prisma migrate dev`: Executa as migrações do banco de dados com base nos arquivos de migração do Prisma.
+
+-   `npx prisma db seed`: Executa as seeders para popular o banco de dados com arquivos iniciais.
     
 -   `npx prisma migrate reset`: Executa um reset no banco de dados.
     

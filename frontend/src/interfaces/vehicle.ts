@@ -1,5 +1,5 @@
 export interface iVehicle {
-  id: number
+  id: string
   plaque: string
   model: string
   entry: Date

@@ -58,7 +58,11 @@ export default async function User() {
             <p>Credit: R$ {credit}</p>
             <p>Final Price: R$ {finalPrice}</p>
             <div className="h-4" />
-            <FinishParking finalPrice={finalPrice} creditLeft={creditLeft} />
+            <FinishParking
+              finalPrice={finalPrice}
+              creditLeft={creditLeft}
+              vehicleId={vehicle.id}
+            />
           </div>
         ))
       ) : (

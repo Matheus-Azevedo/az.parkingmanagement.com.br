@@ -4,13 +4,16 @@ import { useState, FormEvent, ChangeEvent } from 'react'
 import { ButtonSubmit } from './ButtonSubmit'
 import { calculatePayment } from '@/functions/calculatePayment'
 import { updateCredit } from '@/functions/updateCredit'
+import { deleteVehicle } from '@/functions/deleteVehicle'
 
 export function FinishParking({
   finalPrice,
   creditLeft,
+  vehicleId,
 }: {
   finalPrice: number
   creditLeft: number
+  vehicleId: string
 }) {
   const [values, setSelectValues] = useState<string[]>([''])
 
@@ -39,6 +42,7 @@ export function FinishParking({
       await calculatePayment(values, finalPrice)
     }
     await updateCredit(creditLeft)
+    await deleteVehicle(vehicleId)
     window.location.reload()
   }
 

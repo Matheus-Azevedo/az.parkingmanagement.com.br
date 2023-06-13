@@ -1,10 +1,10 @@
 import { iVehicle } from '@/interfaces/vehicle'
 import { api } from '@/lib/api'
-import { cookies } from 'next/headers'
+import Cookies from 'js-cookie'
 
 export async function getVehiclesList() {
   try {
-    const token = cookies().get('token')?.value
+    const token = Cookies.get('token')
 
     if (!token) {
       return null

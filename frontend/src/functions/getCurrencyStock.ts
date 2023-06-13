@@ -1,10 +1,10 @@
 import { iCurrency } from '@/interfaces/currency'
 import { api } from '@/lib/api'
-import { cookies } from 'next/headers'
+import Cookies from 'js-cookie'
 
 export async function getCurrencyStock() {
   try {
-    const token = cookies().get('token')?.value
+    const token = Cookies.get('token')
 
     if (!token) {
       return null
@@ -22,12 +22,12 @@ export async function getCurrencyStock() {
       return acc + parseFloat(curr.value) * curr.quantity
     }, 0)
 
-    const formattedCurrencies = new Intl.NumberFormat('pt-BR', {
+    const formattedTotalCurrencies = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
     }).format(totalCurrencies)
 
-    return { currencies, formattedCurrencies }
+    return { currencies, formattedTotalCurrencies }
   } catch (error) {
     console.error(error)
   }
