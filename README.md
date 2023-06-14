@@ -187,3 +187,5 @@ Com um pouco mais tempo com certeza o projeto seria concluído adequadamente, se
   -   Backend: realizado um tratamento de erros inicial e foi posto em arquitetura de camadas baseada em MVC.
   -   Front: realizado a componentização do código e iniciou-se o tratamento de erros.
 
+`Retorno de troco adequado com base nas notas e moedas disponíveis em estoque`: concluído a última funcionalidade da aplicação.
+
