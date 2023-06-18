@@ -1,0 +1,77 @@
+.
+├── backend
+│   ├── coverage
+│   │   └── lcov-report
+│   │       ├── controllers
+│   │       ├── src
+│   │       │   ├── controllers
+│   │       │   ├── database
+│   │       │   ├── routes
+│   │       │   ├── services
+│   │       │   ├── utils
+│   │       │   └── validations
+│   │       ├── utils
+│   │       └── validations
+│   ├── prisma
+│   │   └── migrations
+│   │       ├── 20230524210341_create_user_table
+│   │       ├── 20230524223804_create_vahicle_table
+│   │       ├── 20230525000645_create_currency_stock_table
+│   │       ├── 20230525205730_update_vehicle_table
+│   │       ├── 20230525214911_update_currency_stock_table
+│   │       ├── 20230527015331_update_user_and_wehicle
+│   │       ├── 20230527020649_update_currency_table
+│   │       ├── 20230527021140_update_currency_table
+│   │       ├── 20230527021752_update_currency_table
+│   │       ├── 20230529182731_add
+│   │       ├── 20230529185632_add_unique_prop_in_name_on_table_currency
+│   │       ├── 20230530182409_update_vehicle_table
+│   │       ├── 20230605125855_update_vehicle_table
+│   │       ├── 20230605171920_update_vehicle_table
+│   │       ├── 20230609000401_update_currency_table
+│   │       ├── 20230609000647_update_currency_table
+│   │       ├── 20230609000753_update_currency_table
+│   │       └── 20230609013103_update_currency_table
+│   ├── src
+│   │   ├── controllers
+│   │   ├── database
+│   │   ├── interfaces
+│   │   ├── routes
+│   │   ├── services
+│   │   ├── utils
+│   │   └── validations
+│   └── tests
+└── frontend
+    ├── __tests__
+    │   ├── components
+    │   └── pages
+    │       └── login
+    ├── coverage
+    │   └── lcov-report
+    │       ├── app
+    │       │   ├── admin
+    │       │   ├── login
+    │       │   ├── register
+    │       │   └── user
+    │       ├── components
+    │       ├── functions
+    │       └── lib
+    └── src
+        ├── app
+        │   ├── admin
+        │   │   ├── currency
+        │   │   │   ├── new
+        │   │   │   └── stock
+        │   │   └── vehicle
+        │   │       ├── list
+        │   │       └── new
+        │   ├── login
+        │   ├── register
+        │   └── user
+        ├── assets
+        ├── components
+        ├── functions
+        ├── interfaces
+        └── lib
+
+74 directories
