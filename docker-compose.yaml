@@ -1,12 +1,11 @@
 version: "3"
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-      args:
-        - BACKEND_PORT=3333
+    volumes:
+      - ./backend:/app/backend
     ports:
       - "3333:3333"
     depends_on:
@@ -16,8 +15,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-      args:
-        - FRONTEND_PORT=3000
+    volumes:
+      - ./frontend:/app/frontend
     ports:
       - "3000:3000"
     depends_on:
@@ -27,8 +26,8 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: admin
-      POSTGRES_USER: root
-      POSTGRES_DB: parking_management
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
