@@ -8,10 +8,9 @@ jobs:
   deploy:
     name: Setup Gcloud Account
     runs-on: ubuntu-latest
-    environment: gcp-prod
+    environment: hw-prod
     env:
-      IMAGE_NAME_BACKEND: gcr.io/${{ secrets.GCP_PROJECT_ID }}/backend:latest
-      IMAGE_NAME_FRONTEND: gcr.io/${{ secrets.GCP_PROJECT_ID }}/frontend:latest
+      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/site:latest
     steps:
       # Git checkout
       - name: Checkout
@@ -23,27 +22,19 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      # Backend
-      - name: Configure Docker for Backend
-        run: |
-          cd backend
-          docker build -t $IMAGE_NAME_BACKEND .
-          docker push $IMAGE_NAME_BACKEND
+      # gcloud configure docker
+      - name: Configure Docker
+        run: gcloud auth configure-docker --quiet
 
-      # Frontend
-      - name: Configure Docker for Frontend
-        run: |
-          cd frontend
-          docker build -t $IMAGE_NAME_FRONTEND .
-          docker push $IMAGE_NAME_FRONTEND
+      # build image
+      - name: Build Docker image
+        run: docker build -t $IMAGE_NAME .
 
-      # Deploy Backend
-      - name: Deploy Backend
-        run: |
-          gcloud run deploy backend --image $IMAGE_NAME_BACKEND --region us-central1 --memory 128Mi --min-instances 0 --max-instances 1 --platform managed --port 3333 --allow-unauthenticated
+      # push image to registry
+      - name: Push Docker image
+        run: docker push $IMAGE_NAME
 
-      # Deploy Frontend
-      - name: Deploy Frontend
-        run: |
-          gcloud run deploy frontend --image $IMAGE_NAME_FRONTEND --region us-central1 --memory 128Mi --min-instances 0 --max-instances 1 --platform managed --port 80 --allow-unauthenticated
+      # deploy image
+      - name: Deploy Docker image
+        run: gcloud run deploy site --image $IMAGE_NAME --region us-central1 --memory 128Mi --min-instances 0 --max-instances 1 --platform managed --port 80 --allow-unauthenticated
 
