@@ -55,26 +55,32 @@ Este é um sistema de cobrança e controle para um estacionamento. O sistema reg
 # Como executar o projeto
 
 1.  Clone o repositório:
-
--   `git clone git@github.com:Matheus-Azevedo/az.parkingmanagement.com.br.git` 
-
-ou
-
--   `git clone https://github.com/Matheus-Azevedo/az.parkingmanagement.com.br.git` 
-
+    
+    `git clone git@github.com:Matheus-Azevedo/az.parkingmanagement.com.br.git` 
+    
+    ou
+    
+    `git clone https://github.com/Matheus-Azevedo/az.parkingmanagement.com.br.git` 
+    
 2.  Configure o ambiente:
-
--   `npm i`: Rode o comando tanto na pasta Backend quanto na pasta Frontend
-
-3.  Configure o banco de dados:
-
--   `docker run --name parking_management -e POSTGRES_PASSWORD=admin -e POSTGRES_USER=root -e POSTGRES_DB=parking_management -p 5432:5432 -d postgres`: utilizer o docker para gerar o banco postgreSQL.
-
--   `npx prisma migrate dev`: para executar migrations do prisma que vão preencher o banco.
-
--   `npx prisma db seed`: Executa as seeders para popular o banco de dados com arquivos iniciais.
-
--   `npx prisma studio`: abrirá no navegador o banco de dados com sua tabelas, é possível fazer operações nele através de um simples clique. 
+    
+  -   Execute o seguinte comando tanto na pasta `Backend` quanto na pasta `Frontend` para instalar as dependências:
+        
+      `npm install` 
+        
+3.  Execute o Docker Compose:
+    
+  -   Certifique-se de ter o Docker Compose instalado em sua máquina.
+        
+  -   Navegue para o diretório raiz do projeto, onde está localizado o arquivo `docker-compose.yml`.
+        
+  -   Execute o seguinte comando para iniciar os serviços definidos no Docker Compose:
+        
+      `docker compose up` 
+          
+      O Docker Compose irá baixar as imagens necessárias, criar e iniciar os contêineres para o backend, frontend e banco de dados PostgreSQL. Ele também irá configurar as variáveis de ambiente definidas no arquivo `.env` para o contêiner do banco de dados.
+    
+4.  Acesse o projeto: `http://localhost:3000`. 
 
 # Configurações realizadas
 
