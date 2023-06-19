@@ -16,5 +16,5 @@ COPY . .
 # Expose a port if your application needs to listen on a specific port
 EXPOSE 3333
 
-# Specify the command to run your application
-CMD [ "npm", "run", "dev", "&&", "npx", "prisma", "migrate", "dev", "&&", "npx", "prisma", "db", "seed" ]
+# Start the application
+CMD ["npm", "run", "dev"]

@@ -79,8 +79,14 @@ Este é um sistema de cobrança e controle para um estacionamento. O sistema reg
       `docker compose up` 
           
       O Docker Compose irá baixar as imagens necessárias, criar e iniciar os contêineres para o backend, frontend e banco de dados PostgreSQL. Ele também irá configurar as variáveis de ambiente definidas no arquivo `.env` para o contêiner do banco de dados.
+
+4.  Acesse o shell do container backend e rode os comandos:
+
+  -   `npx prisma migrate dev`: Executa as migrações do banco de dados com base nos arquivos de migração do Prisma.
+
+  -   `npx prisma db seed`: Executa as seeders para popular o banco de dados com arquivos iniciais.
     
-4.  Acesse o projeto: `http://localhost:3000`. 
+5.  Acesse o projeto: `http://localhost:3000`. 
 
 # Configurações realizadas
 
