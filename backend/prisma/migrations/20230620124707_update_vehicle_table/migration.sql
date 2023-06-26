@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Vehicle" ADD COLUMN     "amountPaid" DOUBLE PRECISION,
+ADD COLUMN     "change" DOUBLE PRECISION,
+ADD COLUMN     "exit" TIMESTAMP(3),
+ADD COLUMN     "totalSpent" DOUBLE PRECISION;

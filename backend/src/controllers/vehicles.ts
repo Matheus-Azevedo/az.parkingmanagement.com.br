@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { vehiclesServices } from '../services/vehicles'
 import { statusCode } from '../utils/statusCode'
-import { bodySchema, idSchema } from '../validations/vehicles'
+import { bodySchema, bodySchema2, idSchema } from '../validations/vehicles'
 
 async function getAll(request: FastifyRequest, reply: FastifyReply) {
   const { user } = request
@@ -52,12 +52,17 @@ async function create(request: FastifyRequest, reply: FastifyReply) {
 
 async function update(request: FastifyRequest, reply: FastifyReply) {
   const { id } = idSchema.parse(request.params)
-  const { plaque, model } = bodySchema.parse(request.body)
+  const { exit, totalTime, totalSpent, amountPaid, change } = bodySchema2.parse(
+    request.body,
+  )
   try {
     const { status, data, message } = await vehiclesServices().update(
       id,
-      plaque,
-      model,
+      exit,
+      totalTime,
+      totalSpent,
+      amountPaid,
+      change,
     )
     if (message) {
       reply.status(status).send({ message })

@@ -42,14 +42,6 @@ async function getOne(id: string, user: iUser) {
 }
 
 async function create(plaque: string, model: string, email: string) {
-  const vehicleExists = await prismaClient.vehicle.findFirst({
-    where: { plaque },
-  })
-
-  if (vehicleExists) {
-    return { status: statusCode.CONFLICT, message: 'Conflict' }
-  }
-
   const user = await prismaClient.user.findUnique({
     where: { email },
   })
@@ -69,7 +61,14 @@ async function create(plaque: string, model: string, email: string) {
   return { status: statusCode.CREATED, data: newVehicle }
 }
 
-async function update(id: string, plaque: string, model: string) {
+async function update(
+  id: string,
+  exit: Date,
+  totalTime: number,
+  totalSpent: number,
+  amountPaid: number,
+  change: number,
+) {
   const vehicleExists = await prismaClient.vehicle.findUnique({
     where: { id },
   })
@@ -81,8 +80,11 @@ async function update(id: string, plaque: string, model: string) {
   const updateVehicle = await prismaClient.vehicle.update({
     where: { id },
     data: {
-      plaque,
-      model,
+      exit,
+      totalTime,
+      totalSpent,
+      amountPaid,
+      change,
     },
   })
   return { status: statusCode.OK, data: updateVehicle }

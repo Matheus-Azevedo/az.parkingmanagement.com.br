@@ -16,6 +16,13 @@ export async function getVehiclesList() {
       },
     })
     const vehicles: iVehicle[] = response.data
+      .map((vehicle: iVehicle) => {
+        if (vehicle.exit === null) {
+          return vehicle
+        }
+        return undefined
+      })
+      .filter((vehicle: iVehicle) => vehicle)
 
     return { vehicles }
   } catch (error) {

@@ -68,7 +68,9 @@ Este é um sistema de cobrança e controle para um estacionamento. O sistema reg
         
       `npm install` 
         
-3.  Execute o Docker Compose:
+3.  Execute entre:
+
+      3.1 O Docker Compose:
     
   -   Certifique-se de ter o Docker Compose instalado em sua máquina.
         
@@ -79,6 +81,11 @@ Este é um sistema de cobrança e controle para um estacionamento. O sistema reg
       `docker compose up` 
           
       O Docker Compose irá baixar as imagens necessárias, criar e iniciar os contêineres para o backend, frontend e banco de dados PostgreSQL. Ele também irá configurar as variáveis de ambiente definidas no arquivo `.env` para o contêiner do banco de dados.
+
+      3.2 Ou utilize apenas um container para banco:
+
+  -   `docker run --name parking_management -e POSTGRES_PASSWORD=admin -e POSTGRES_USER=root -e POSTGRES_DB=parking_management -p 5432:5432 -d postgres`: Inicia um contêiner Docker com o PostgreSQL para o projeto.
+
 
 4.  Acesse o shell do container backend e rode os comandos:
 

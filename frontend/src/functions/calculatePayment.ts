@@ -35,44 +35,45 @@ export async function calculatePayment(values: string[], totalSpent: number) {
     const sumValues = values.reduce((acc, value) => acc + Number(value), 0)
     const changeValue = sumValues - totalSpent
 
-    if (changeValue === 0) {
-      return { message: 'Sem troco' }
-    }
-    const arrayOfChange = calculateBankNotesAndCoins(changeValue)
+    if (changeValue !== 0) {
+      const arrayOfChange = calculateBankNotesAndCoins(changeValue)
 
-    const valueWithoutChange = []
-    for (const currency of currencies) {
-      for (const value of arrayOfChange) {
-        if (currency.value === String(value)) {
-          if (currency.quantity === 0) {
-            valueWithoutChange.push(value)
-          } else {
-            await api.put(
-              `/currency/${currency.id}`,
-              {
-                quantity: -1,
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
+      const valueWithoutChange = []
+      for (const currency of currencies) {
+        for (const value of arrayOfChange) {
+          if (currency.value === String(value)) {
+            if (currency.quantity === 0) {
+              valueWithoutChange.push(value)
+            } else {
+              await api.put(
+                `/currency/${currency.id}`,
+                {
+                  quantity: -1,
                 },
-              },
-            )
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                },
+              )
+            }
           }
         }
       }
+
+      const credit = valueWithoutChange.reduce(
+        (acc, value) => acc + Number(value),
+        0,
+      )
+
+      await api.put(
+        '/user',
+        { credit },
+        { headers: { Authorization: `Bearer ${token}` } },
+      )
     }
 
-    const credit = valueWithoutChange.reduce(
-      (acc, value) => acc + Number(value),
-      0,
-    )
-
-    await api.put(
-      '/user',
-      { credit },
-      { headers: { Authorization: `Bearer ${token}` } },
-    )
+    return changeValue
   } catch (error) {
     console.error(error)
   }

@@ -13,9 +13,16 @@ export async function getUserData(token: string, sub: string) {
       },
     })
     const vehicles: iVehicle[] = response.data
+      .map((vehicle: iVehicle) => {
+        if (vehicle.exit === null) {
+          return vehicle
+        }
+        return undefined
+      })
+      .filter((vehicle: iVehicle) => vehicle)
 
     const entry = dayjs(vehicles[0].entry)
-    const exit = dayjs()
+    const exit = new Date()
     let totalTime = dayjs(exit).diff(dayjs(entry), 'hour')
     if (totalTime < 1) {
       totalTime = 1
